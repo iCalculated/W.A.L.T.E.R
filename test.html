@@ -7,10 +7,9 @@
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
     />
     <title>W.A.L.T.E.R.</title>
-
     <link
-      rel="stylesheet"
-      href="https://js.arcgis.com/4.12/esri/themes/light/main.css"
+    rel="stylesheet"
+    href="https://js.arcgis.com/4.12/esri/themes/dark-blue/main.css"
     />
     <script src="https://js.arcgis.com/4.12/"></script>
 
@@ -22,6 +21,7 @@
         margin: 0;
         height: 100%;
         width: 100%;
+        background-color: #2a2a28;
       }
 
       #paneDiv {
@@ -30,6 +30,7 @@
         background-color: rgba(255, 255, 255, 0.8);
         font-size: 1.1em;
         line-height: 0.5em;
+        background-color :#373845;
       }
 
       #credits {
@@ -82,7 +83,7 @@
       FeatureLayer, GraphicsLayer) {
 
       var map = new Map({
-        basemap: "streets-navigation-vector"
+        basemap: "streets-night-vector"
       });
 
       var view = new MapView({
@@ -95,12 +96,12 @@
            var addingStops = true;
 
        // Reference the feature layer to query
-        var ren = {
+        var cluster_mark = {
           type: "simple",
           symbol: {
             color: "#BA55D3",
             type: "simple-marker",
-            style: "solid"
+            style: "triangle"
           },
           visualVariables: [
             {
@@ -116,7 +117,7 @@
 
        var featureLayer = new FeatureLayer({
          url: "https://services7.arcgis.com/9DY887YAIGnBSm9O/arcgis/rest/services/mydata_2/FeatureServer",
-         renderer: ren,
+         renderer: cluster_mark,
          opacity: .75
        });
 
@@ -128,16 +129,6 @@
        });
 
        map.add(pureData);
-
-  var polygon = new Polygon({
-    rings: [
-      [-93.154083, 44.937809],
-      [-93.154583, 44.937809],
-      [-93.154583, 44.938189],
-      [-93.154083, 44.938189],
-      [-93.154083, 44.937809]
-    ]
-  });
 
   var clusters = [];
 
@@ -151,19 +142,6 @@
       width: 1
     }
   });
-
-  // Add the geometry and symbol to a new graphic
-  var polygonGraphic = new Graphic({
-    geometry: polygon,
-    symbol: fillSymbol
-  });
-
-view.graphics.add(polygonGraphic);
-// console.log(polygonGraphic.geometry.rings[0][0][0]);
-
-
-
-
 
       var routeTask = new RouteTask({
          url: "https://utility.arcgis.com/usrsvcs/appservices/cKkdHgNqquMZkgAf/rest/services/World/Route/NAServer/Route_World"
@@ -195,13 +173,13 @@ view.graphics.add(polygonGraphic);
 for(var btnIndex=1; btnIndex<7; btnIndex++){
   console.log(btmBtns[btnIndex-1]);
               btmBtns[btnIndex-1].addEventListener("mouseover", function(){
-                  document.getElementById("texty").innerHTML = "Route "+(1+this.number);
+                  document.getElementById("button_row").innerHTML = "Route "+(1+this.number);
                   console.log(btnIndex-1);
         console.log(highlighters[btnIndex-1]);
         highlighters[this.number].visible=true;
       });
               btmBtns[btnIndex-1].addEventListener("mouseout", function(){
-                  document.getElementById("texty").innerHTML = "Select Route";
+                  document.getElementById("button_row").innerHTML = "Select Route";
                   console.log(btnIndex-1);
         console.log(highlighters[btnIndex-1]);
         highlighters[this.number].visible=false;
@@ -272,7 +250,7 @@ for(var btnIndex=1; btnIndex<7; btnIndex++){
             }
           , i*1000);
           setTimeout(function(){
-                  document.getElementById("texty").innerHTML = (counter-1) + " Routes Found";
+                  document.getElementById("button_row").innerHTML = (counter-1) + " Routes Found";
                   document.getElementById("mainDiv").style.display = "block";
                   for(var buttonNum2 = counter; buttonNum2<7; buttonNum2++){
                     var id2="button"+buttonNum2;
@@ -398,8 +376,7 @@ function addGraphic(type, point) {
             var biggestCluster = 0;
             var biggestSize = 0;
 
-          for(var clustIndex = 0; clustIndex < clusters.length; clustIndex++){
-
+          for(var clusterIndex = 0; clustIndex < clusters.length; clustIndex++){
 
             var cross = false;
             for(var j=0; j<result.route.geometry.paths[0].length-1; j++){
@@ -408,22 +385,21 @@ function addGraphic(type, point) {
               var a = [result.route.geometry.paths[0][j][0],result.route.geometry.paths[0][j][1]];
               var b = [result.route.geometry.paths[0][j+1][0],result.route.geometry.paths[0][j+1][1]];
               for(var g=0; g<polygonGraphic.geometry.rings[0].length-1; g++){
-                var c = [clusters[clustIndex].geometry.rings[0][g][0],clusters[clustIndex].geometry.rings[0][g][1]];
-                var d = [clusters[clustIndex].geometry.rings[0][g+1][0],clusters[clustIndex].geometry.rings[0][g+1][1]];
+                var c = [clusters[clusterIndex].geometry.rings[0][g][0],clusters[clustIndex].geometry.rings[0][g][1]];
+                var d = [clusters[clusterIndex].geometry.rings[0][g+1][0],clusters[clustIndex].geometry.rings[0][g+1][1]];
                 if(intersect(a,b,c,d)){
                   cross = true;
                 }
               }
             }
             if(cross){
-              // clusters[clustIndex].visible=true;
+              // clusters[clusterIndex].visible=true;
               var size;
-                size = clusterData[clustIndex][2];
+                size = clusterData[clusterIndex][2];
                 if (size > biggestSize){
-                  biggestCluster = clusters[clustIndex];
+                  biggestCluster = clusters[clusterIndex];
                   biggestSize = size;
                 }
-              // console.log(size);
             }
 
 
@@ -1015,7 +991,7 @@ function addGraphic(type, point) {
       <p id="credits"> Created by Mani Chadaga, Akshay Nambudiripad, and Sasha Hydrie with help from ArcGIS (Esri) </p>
     </div>
     <div id="mainDiv" class="esri-widget">
-      <h2 id="texty"><b></b></h2>
+      <h2 id="button_row"><b></b></h2>
       <button id="button1" class="esri-button esri-button-overwrite">Route 1</button>
       <button id="button2" class="esri-button esri-button-overwrite">Route 2</button>
       <button id="button3" class="esri-button esri-button-overwrite">Route 3</button>
