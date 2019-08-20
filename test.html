@@ -64,7 +64,6 @@
   "esri/geometry/Polyline",
   "esri/symbols/SimpleLineSymbol",
   "esri/geometry/Polygon",
-  // "esri/tasks/GeometryService",
   "esri/symbols/SimpleFillSymbol",
       "esri/tasks/RouteTask",
       "esri/tasks/support/RouteParameters",
@@ -91,7 +90,6 @@
         container: "viewDiv",
         map: map,
         center: [-93.154283, 44.937909],
-                // center: [-118.80543,34.02700],
         zoom: 14
       });
 
@@ -117,13 +115,6 @@
           ]
       };
 
-      // for(var buttonNum = 1; buttonNum < 7; buttonNum++){
-      //   var id = "button"+buttonNum;
-      //   document.getElementById(id).style.display = "none";
-      // }
-
-
-
        var featureLayer = new FeatureLayer({
          url: "https://services7.arcgis.com/9DY887YAIGnBSm9O/arcgis/rest/services/mydata_2/FeatureServer",
          renderer: ren,
@@ -138,159 +129,6 @@
        });
 
        map.add(pureData);
-
-      //  // Layer used to draw graphics returned
-      //  var graphicsLayer = new GraphicsLayer();
-      //  map.add(graphicsLayer);
-
-
-      //  var featureLayer2 = new FeatureLayer({
-      //    url: "https://services7.arcgis.com/9DY887YAIGnBSm9O/arcgis/rest/services/mydata/FeatureServer/0",
-      //  });
-
-      //  // Layer used to draw graphics returned
-      //  var graphicsLayer2 = new GraphicsLayer();
-      //  map.add(graphicsLayer2);
-
-      //        function addGraphics(result) {
-      //   graphicsLayer.removeAll();
-      //   result.features.forEach(function(feature){
-      //     var g = new Graphic({
-      //       geometry: feature.geometry,
-      //       attributes: feature.attributes,
-      //       symbol: {
-      //        type: "simple-marker",
-      //         color: [0,0,0],
-      //         outline: {
-      //          width: 1,
-      //          color: [0,255,255],
-      //        },
-      //         size: "8px"
-      //       },
-      //       popupTemplate: {
-      //        title: "{TRL_NAME}",
-      //        content: "This a {PARK_NAME} trail located in {CITY_JUR}."
-      //       }
-      //     });
-      //     graphicsLayer.add(g);
-      //   });
-      // }
-
-      // function addGraphics2(result) {
-      //   graphicsLayer2.removeAll();
-      //   result.features.forEach(function(feature){
-      //     var g = new Graphic({
-      //       geometry: feature.geometry,
-      //       attributes: feature.attributes,
-      //       symbol: {
-      //        type: "simple-marker",
-      //         color: [0,0,0],
-      //         outline: {
-      //          width: 1,
-      //          color: [255,0,0],
-      //        },
-      //         size: "8px"
-      //       },
-      //       popupTemplate: {
-      //        title: "{crashClust2.size}",
-      //        content: "This a {x1} trail located in {x2}."
-      //       }
-      //     });
-      //     graphicsLayer2.add(g);
-      //   });
-      // }
-
-      //       function queryFeatureLayer(point, distance, spatialRelationship, sqlExpression) {
-      //   var query = {
-      //     geometry: point,
-      //     distance: distance,
-      //     spatialRelationship: spatialRelationship,
-      //     outFields: ["*"],
-      //     returnGeometry: true,
-      //     where: sqlExpression
-      //   };
-      //   featureLayer.queryFeatures(query).then(function(result) {
-      //     addGraphics(result, true);
-      //   });
-      // featureLayer2.queryFeatures(query).then(function(result) {
-      //     addGraphics2(result, true);
-      //   });
-      // }
-
-      //       view.when(function(){
-      //   queryFeatureLayer(view.center, 15000, "intersects");
-      // });
-
-
-      //   featureLayer2.queryFeatures(query).then(function(result) {
-      //     addGraphics(result, true);
-      //   });
-      // }
-
-      //       view.when(function(){
-      //   queryFeatureLayer(view.center, 15000, "intersects");
-      // });
-
-  // Create a point
-  // var point = new Point({
-  //   longitude: -118.29507,
-  //   latitude: 34.13501
-  // });
-
-  // // Create a symbol for drawing the point
-  // var markerSymbol = new SimpleMarkerSymbol({
-  //   color: [226, 119, 40],
-  //   outline: {
-  //     color: [255, 255, 255],
-  //     width: 1
-  //   }
-  // });
-
-  // // Create attributes
-  // var attributes = {
-  //   Name: "I am a point",  // The name of the pipeline
-  //   Park: "Griffith Park",  // The owner of the pipeline
-  //   City: "Los Angeles"  // The length of the pipeline
-  // };
-
-  // // Create popup template
-  // var popupTemplate = {
-  //   title: "{Name}",
-  //   content: "I live in <b>{Park}</b> in the city of <b>{City}</b>."
-  // };
-
-  // Create a graphic and add the geometry and symbol to it
-  // var pointGraphic = new Graphic({
-  //   geometry: point,
-  //   symbol: markerSymbol,
-  //   attributes: attributes,
-  //   popupTemplate: popupTemplate
-  // });
-
-  // view.graphics.add(pointGraphic);
-
-  // // Create a line geometry
-  // var polyline = new Polyline({
-  //   paths: [
-  //     [-118.29026, 34.1816],
-  //     [-118.26451, 34.09664]
-  //   ]
-  // });
-
-  // // Create a symbol for drawing the line
-  // var lineSymbol = new SimpleLineSymbol({
-  //   color: [226, 119, 40],
-  //   width: 2
-  // });
-
-  // // Create a line graphic
-  // var polylineGraphic = new Graphic({
-  //   geometry: polyline,
-  //   symbol: lineSymbol
-  // })
-
-  // // Add the graphic to the view
-  // view.graphics.add(polylineGraphic);
 
   var polygon = new Polygon({
     rings: [
@@ -346,21 +184,6 @@ view.graphics.add(polygonGraphic);
 
       var clNavBtn = document.getElementById("clnav");
 
-      // var btmBtn1 = document.getElementById("button1");
-      // var btmBtn2 =  document.getElementById("button2");
-
-      // btmBtn1.addEventListener("mouseover", function(){
-      //   document.getElementById("texty").innerHTML = "Button 1";
-      //   console.log(highlighters);
-      //   highlighters[0].visible=false;
-      //   console.log(highlighters[0].visible);
-      // });
-
-      // btmBtn1.addEventListener("mouseout", function(){
-      //   document.getElementById("texty").innerHTML = "Select Route";
-      //   highlighters[0].visible=true;
-      // });
-
 
       var btmBtns = [];
      for(var btnIndex=1; btnIndex<7; btnIndex++){
@@ -370,10 +193,6 @@ view.graphics.add(polygonGraphic);
         btmBtns[btnIndex-1].numbre=btnIndex-1;
       }
       console.log(btmBtns);
-        //       btmBtns[btnIndex-1].addEventListener("mouseover", function(){
-        //           document.getElementById("texty").innerHTML = "Button "+btnIndex;
-        // console.log(highlighters);
-        // highlighters[btnIndex-1].visible=false;
 for(var btnIndex=1; btnIndex<7; btnIndex++){
   console.log(btmBtns[btnIndex-1]);
               btmBtns[btnIndex-1].addEventListener("mouseover", function(){
@@ -412,16 +231,6 @@ for(var btnIndex=1; btnIndex<7; btnIndex++){
 
       clNavBtn.addEventListener("click", function() {
     document.getElementById("button4").style.display = "none";
-        // console.log(routes);
-
-        // console.log(document.getElementById("maneDiv"));
-
-        // document.getElementById("maneDiv").removeChild(document.getElementById("button4"));
-        // for (var i=routes.length-1; i>=0; i--) {
-        //   view.graphics.remove(routes[i]);
-        // }
-
-        // console.log(routes);
 
               });
 
@@ -432,11 +241,6 @@ for(var btnIndex=1; btnIndex<7; btnIndex++){
 
       navBtn.addEventListener("click", function() {
 
-        // getRoute();
-        // setTimeout(getRoute, 1000);
-        // setTimeout(getRoute, 2000);
-        // setTimeout(getRoute, 3000);
-        // setTimeout(getRoute, 4000);
         var counter=7;
         var otherCounter=0;
         var last=0;
@@ -536,13 +340,6 @@ function addGraphic(type, point) {
     ]
   });
 
-// var feature = new Feature({
-//   container:"feature-node",
-//   graphic: graphic,
-//   map: view.map,
-//   spatialReference: view.spatialReference
-// });
-
   // Create a symbol for rendering the graphic
   var bfillSymbol = new SimpleFillSymbol({
     color: [227, 139, 79, 0.8],
@@ -578,16 +375,6 @@ function addGraphic(type, point) {
       function intersect(a, b, c, d){
         return (ccw(a,c,d) != ccw(b,c,d)) && (ccw(a,b,c) != ccw(a,b,d));
       }
-
-      // console.log(ccw([0,0],[0,-1],[1,0]));
-
-      // console.log(ccw([0,0],[0,-1],[-1,0]));
-
-      // console.log(intersect([0,1],[0,-1],[1,0],[-1,0]));
-
-      // console.log(intersect([0,1],[0,-1],[1,0],[-0.000000000001,0]));
-
-
 
       function getRoute() {
         // Setup the route parameters
@@ -695,10 +482,6 @@ function addGraphic(type, point) {
                   width: 6
                   }
             });
-            // var clone = JSON.parse(JSON.stringify(result.route));
-            // clone.symbol.color[0]=255;
-            // console.log(result.route.symbol.color);
-            // console.log(clone.symbol.color);
             highlighters.push(clone);
             clone.visible = false;
             view.graphics.add(result.route, 0);
@@ -736,11 +519,6 @@ function addGraphic(type, point) {
             direction.innerHTML = result.attributes.text + " (" + result.attributes.length.toFixed(2) + " miles)";
             directions.appendChild(direction);
           });
-
-          // // Add directions to the view
-          // var timeHtml =  document.createElement("li");
-          // timeHtml.innerHTML = data.routeResults[0].directions.totalDriveTime;
-          // directions.appendChild(timeHtml);
 
           view.ui.empty("bottom-right");
           view.ui.add(directions, "bottom-right");
