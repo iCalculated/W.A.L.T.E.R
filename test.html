@@ -37,7 +37,7 @@
         line-height: 1.1em;
       }
 
-      #maneDiv {
+      #mainDiv {
         position: absolute;
         bottom: 40px;
         width: 100%;
@@ -84,7 +84,6 @@
       var map = new Map({
         basemap: "streets-navigation-vector"
       });
-
 
       var view = new MapView({
         container: "viewDiv",
@@ -190,22 +189,22 @@ view.graphics.add(polygonGraphic);
         btmBtns.push(document.getElementById("button"+btnIndex));
       }
       for(var btnIndex=1; btnIndex<7; btnIndex++){
-        btmBtns[btnIndex-1].numbre=btnIndex-1;
+        btmBtns[btnIndex-1].number=btnIndex-1;
       }
       console.log(btmBtns);
 for(var btnIndex=1; btnIndex<7; btnIndex++){
   console.log(btmBtns[btnIndex-1]);
               btmBtns[btnIndex-1].addEventListener("mouseover", function(){
-                  document.getElementById("texty").innerHTML = "Button "+(1+this.numbre);
+                  document.getElementById("texty").innerHTML = "Route "+(1+this.number);
                   console.log(btnIndex-1);
         console.log(highlighters[btnIndex-1]);
-        highlighters[this.numbre].visible=true;
+        highlighters[this.number].visible=true;
       });
               btmBtns[btnIndex-1].addEventListener("mouseout", function(){
                   document.getElementById("texty").innerHTML = "Select Route";
                   console.log(btnIndex-1);
         console.log(highlighters[btnIndex-1]);
-        highlighters[this.numbre].visible=false;
+        highlighters[this.number].visible=false;
       });
       }
 
@@ -274,7 +273,7 @@ for(var btnIndex=1; btnIndex<7; btnIndex++){
           , i*1000);
           setTimeout(function(){
                   document.getElementById("texty").innerHTML = (counter-1) + " Routes Found";
-                  document.getElementById("maneDiv").style.display = "block";
+                  document.getElementById("mainDiv").style.display = "block";
                   for(var buttonNum2 = counter; buttonNum2<7; buttonNum2++){
                     var id2="button"+buttonNum2;
                     document.getElementById(id2).style.display = "none";
@@ -287,7 +286,7 @@ for(var btnIndex=1; btnIndex<7; btnIndex++){
 
         });
 
-      document.getElementById("maneDiv").style.display = "none";
+      document.getElementById("mainDiv").style.display = "none";
 
 
       function compareArray(arr1, arr2){
@@ -784,8 +783,7 @@ function addGraphic(type, point) {
             addCluster(clData[i][0], clData[i][1], clData[i][2]);
           }
         }
-        addClusterData(clusterData);
-
+        addClusterData(clusterData); 
         function addClusters(){
           addCluster( -93.069405  , 44.960204 , 2 );
           addCluster( -93.11740745  , 44.95585436 , 11  );
@@ -1014,11 +1012,9 @@ function addGraphic(type, point) {
       <br></br>
       <button id="nav" class="esri-button">Navigate!</button>
       <button id="clnav" class="esri-button">Clear Routes</button>
-      <p id="credits">
-        Created by Mani Chadaga, Akshay Nambudiripad, and Sasha Hydrie with help from ArcGIS (Esri)
-      </p>
+      <p id="credits"> Created by Mani Chadaga, Akshay Nambudiripad, and Sasha Hydrie with help from ArcGIS (Esri) </p>
     </div>
-    <div id="maneDiv" class="esri-widget">
+    <div id="mainDiv" class="esri-widget">
       <h2 id="texty"><b></b></h2>
       <button id="button1" class="esri-button esri-button-overwrite">Route 1</button>
       <button id="button2" class="esri-button esri-button-overwrite">Route 2</button>
