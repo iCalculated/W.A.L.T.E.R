@@ -169,19 +169,19 @@
       for(var i=1; i<7; i++){
         bottomButtons[i-1].number=i-1;
       }
-      console.log(bottomButtons);
+      //console.log(bottomButtons);
 for(var i=1; i<7; i++){
-  console.log(bottomButtons[i-1]);
+  //console.log(bottomButtons[i-1]);
               bottomButtons[i-1].addEventListener("mouseover", function(){
                   document.getElementById("button_row").innerHTML = "Route "+(1+this.number);
-                  console.log(i-1);
-        console.log(highlighters[i-1]);
+                  //console.log(i-1);
+        //console.log(highlighters[i-1]);
         highlighters[this.number].visible=true;
       });
               bottomButtons[i-1].addEventListener("mouseout", function(){
                   document.getElementById("button_row").innerHTML = "Select Route";
-                  console.log(i-1);
-        console.log(highlighters[i-1]);
+                  //console.log(i-1);
+        //console.log(highlighters[i-1]);
         highlighters[this.number].visible=false;
       });
       }
@@ -228,17 +228,17 @@ for(var i=1; i<7; i++){
                     what=true;
                   }
                   counter--;
-                  console.log(counter);
+                  //console.log(counter);
                 }
               }
-              // console.log(routes[0].geometry.paths[0])
+              // //console.log(routes[0].geometry.paths[0])
               last=routes[0].geometry.paths[0];
             }
             // if(last!=0 && last.geometry.paths===curr.geometry.paths){counter--;}
             // last=routes[0];
-            // console.log(counter);
+            // //console.log(counter);
             // counter++;
-            console.log(counter);
+            //console.log(counter);
             otherCounter++;
 
 
@@ -401,7 +401,7 @@ function addGraphic(type, point) {
           }
 
           if(biggestCluster === 0 ){
-            console.log("ok");
+            //console.log("ok");
           }
           else{
             biggestCluster.visible=true;
@@ -474,7 +474,7 @@ function addGraphic(type, point) {
           directions.style.paddingTop = "15px";
 
           // Show the directions
-          console.log(data.routeResults[0].directions);
+          //console.log(data.routeResults[0].directions);
 
           // directions.appendChild(data.routeResults[0].directions.totalDriveTime);
 
@@ -492,7 +492,7 @@ function addGraphic(type, point) {
 
           view.ui.empty("bottom-right");
           view.ui.add(directions, "bottom-right");
-          console.log(routes);
+          //console.log(routes);
 
         });
       }
@@ -960,7 +960,7 @@ function addGraphic(type, point) {
         }
         // addClusters();
 
-        // console.log(clusters);
+        // //console.log(clusters);
 
         clusters[1].symbol.outline.color.b = 255;
         clusters[1].symbol.outline.color.r = 0;
