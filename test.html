@@ -21,7 +21,7 @@
         margin: 0;
         height: 100%;
         width: 100%;
-        background-color: #2a2a28;
+        background-color: #242424;
       }
 
       #paneDiv {
@@ -30,7 +30,7 @@
         background-color: rgba(255, 255, 255, 0.8);
         font-size: 1.1em;
         line-height: 0.5em;
-        background-color :#373845;
+        background-color: #242424;
       }
 
       #credits {
@@ -51,8 +51,8 @@
         width: auto;
         display: table-cell;
         margin: 4px;
-        background-color: white;
-        color: #0079c1;
+        background-color: #242424;
+        color: #69dcff;
       }
     </style>
     <script>
@@ -162,26 +162,26 @@
       var clNavBtn = document.getElementById("clnav");
 
 
-      var btmBtns = [];
+      var bottomButtons = [];
      for(var btnIndex=1; btnIndex<7; btnIndex++){
-        btmBtns.push(document.getElementById("button"+btnIndex));
+        bottomButtons.push(document.getElementById("button"+i));
       }
-      for(var btnIndex=1; btnIndex<7; btnIndex++){
-        btmBtns[btnIndex-1].number=btnIndex-1;
+      for(var i=1; i<7; i++){
+        bottomButtons[i-1].number=i-1;
       }
-      console.log(btmBtns);
-for(var btnIndex=1; btnIndex<7; btnIndex++){
-  console.log(btmBtns[btnIndex-1]);
-              btmBtns[btnIndex-1].addEventListener("mouseover", function(){
+      console.log(bottomButtons);
+for(var i=1; i<7; i++){
+  console.log(bottomButtons[i-1]);
+              bottomButtons[i-1].addEventListener("mouseover", function(){
                   document.getElementById("button_row").innerHTML = "Route "+(1+this.number);
-                  console.log(btnIndex-1);
-        console.log(highlighters[btnIndex-1]);
+                  console.log(i-1);
+        console.log(highlighters[i-1]);
         highlighters[this.number].visible=true;
       });
-              btmBtns[btnIndex-1].addEventListener("mouseout", function(){
+              bottomButtons[i-1].addEventListener("mouseout", function(){
                   document.getElementById("button_row").innerHTML = "Select Route";
-                  console.log(btnIndex-1);
-        console.log(highlighters[btnIndex-1]);
+                  console.log(i-1);
+        console.log(highlighters[i-1]);
         highlighters[this.number].visible=false;
       });
       }
@@ -210,11 +210,6 @@ for(var btnIndex=1; btnIndex<7; btnIndex++){
     document.getElementById("button4").style.display = "none";
 
               });
-
-
-      function nothing(){
-        console.log(".");
-      }
 
       navBtn.addEventListener("click", function() {
 
