@@ -159,7 +159,8 @@ for(var number=1; i<7; i++){
       });
 
       clNavBtn.addEventListener("click", function() {
-    console.log(routeList)});
+          console.log(routeList);
+      });
 
       navBtn.addEventListener("click", function() {
 
