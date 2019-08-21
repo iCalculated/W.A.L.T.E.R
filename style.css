@@ -1,5 +1,5 @@
-html
-body
+html,
+body,
 #viewDiv {
     padding: 0;
     margin: 0;
@@ -7,7 +7,6 @@ body
     width: 100%;
     background-color: #242424;
 }
-
 #paneDiv {
     padding: 10px;
     max-width: 200px;
@@ -15,12 +14,10 @@ body
     font-size: 1.1em;
     line-height: 0.5em;
 }
-
 #credits {
     font-size: 0.7em;
     line-height: 1.1em;
 }
-
 #middleDiv {
     position: absolute;
     bottom: 40px;
