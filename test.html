@@ -38,7 +38,7 @@
         line-height: 1.1em;
       }
 
-      #mainDiv {
+      #middleDiv {
         position: absolute;
         bottom: 40px;
         width: 100%;
@@ -46,6 +46,7 @@
         background-color: transparent;
         color: black;
         text-shadow: 0 0 3px #0079c1;
+        line-height: 0.5em;
       }
       .esri-button-overwrite {
         width: auto;
@@ -53,6 +54,15 @@
         margin: 4px;
         background-color: #242424;
         color: #69dcff;
+        }
+      table {
+        text-align: center;
+        table-layout: fixed;
+        width: 100px;
+      }
+      td{
+        width: 40px;
+        vertical-align: top;
       }
     </style>
     <script>
@@ -79,7 +89,7 @@
     ], function(Map, MapView,
       Graphic, Point, SimpleMarkerSymbol,
       Polyline, SimpleLineSymbol,
-      Polygon, SimpleFillSymbol, RouteTask, RouteParameters, /*Feature,*/ FeatureSet, array, on, dom,
+      Polygon, SimpleFillSymbol, RouteTask, RouteParameters, FeatureSet, array, on, dom,
       FeatureLayer, GraphicsLayer) {
 
       var map = new Map({
@@ -246,7 +256,7 @@ for(var i=1; i<7; i++){
           , i*1000);
           setTimeout(function(){
                   document.getElementById("button_row").innerHTML = (counter-1) + " Routes Found";
-                  document.getElementById("mainDiv").style.display = "block";
+                  document.getElementById("middleDiv").style.display = "block";
                   for(var buttonNum2 = counter; buttonNum2<7; buttonNum2++){
                     var id2="button"+buttonNum2;
                     document.getElementById(id2).style.display = "none";
@@ -259,7 +269,7 @@ for(var i=1; i<7; i++){
 
         });
 
-      document.getElementById("mainDiv").style.display = "none";
+      document.getElementById("middleDiv").style.display = "none";
 
 
       function compareArray(arr1, arr2){
@@ -453,6 +463,7 @@ function addGraphic(type, point) {
                   }
             });
             highlighters.push(clone);
+            routeList.push(result.route);
             clone.visible = false;
             view.graphics.add(result.route, 0);
             view.graphics.add(clone);
@@ -985,7 +996,7 @@ function addGraphic(type, point) {
       <button id="clnav" class="esri-button">Clear Routes</button>
       <p id="credits"> Created by Mani Chadaga, Akshay Nambudiripad, and Sasha Hydrie with help from ArcGIS (Esri) </p>
     </div>
-    <div id="mainDiv" class="esri-widget">
+    <div id="middleDiv" class="esri-widget">
       <h2 id="button_row"><b></b></h2>
       <button id="button1" class="esri-button esri-button-overwrite">Route 1</button>
       <button id="button2" class="esri-button esri-button-overwrite">Route 2</button>
