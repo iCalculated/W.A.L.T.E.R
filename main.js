@@ -71,6 +71,16 @@
 
        map.add(pureData);
 
+    var polygon = new Polygon({
+        rings: [
+            [-93.154083, 44.937809],
+            [-93.154583, 44.937809],
+            [-93.154583, 44.938189],
+            [-93.154083, 44.938189],
+            [-93.154083, 44.937809]
+        ]
+    });
+
   var clusters = [];
   var routeList = [];
   var highlighters = [];
@@ -111,7 +121,7 @@
         bottomButtons[i-1].number=i-1;
       }
 
-for(var number=1; i<7; i++){
+for(var i=1; i<7; i++){
 
               bottomButtons[i-1].addEventListener("mouseover", function(){
                   document.getElementById("button_row").innerHTML = Math.floor(routeList[this.number].attributes.Total_TravelTime)+"m  "+Math.round(60*(routeList[this.number].attributes.Total_TravelTime-Math.floor(routeList[this.number].attributes.Total_TravelTime)))+"s  🞄  "+Math.round(100*routeList[this.number].attributes.Total_Miles)/100+" mi";
@@ -254,6 +264,11 @@ function addGraphic(type, point) {
     }
   });
 
+    var polygonGraphic = new Graphic({
+        geometry: polygon,
+        symbol: fillSymbol
+    });
+
 
   var bpolygonGraphic = new Graphic({
     geometry: bpolygon,
@@ -295,7 +310,7 @@ function addGraphic(type, point) {
 
               var a = [result.route.geometry.paths[0][j][0],result.route.geometry.paths[0][j][1]];
               var b = [result.route.geometry.paths[0][j+1][0],result.route.geometry.paths[0][j+1][1]];
-              for(var g=0; g<polygonGraphic.geometry.rings[0].length-1; g++){
+              for(var g=0; g<4; g++){
                 var c = [clusters[clustIndex].geometry.rings[0][g][0],clusters[clustIndex].geometry.rings[0][g][1]];
                 var d = [clusters[clustIndex].geometry.rings[0][g+1][0],clusters[clustIndex].geometry.rings[0][g+1][1]];
                 if(intersect(a,b,c,d)){
@@ -363,7 +378,7 @@ function addGraphic(type, point) {
               geometry: result.route.geometry,
               symbol: {
                   type: "simple-line",
-                  color: [2, 75, 150, 1.0],
+                  color: [255,0,0,1],
                   width: 6
                   }
             });
