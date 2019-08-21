@@ -1,0 +1,49 @@
+html
+body
+#viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #242424;
+}
+
+#paneDiv {
+    padding: 10px;
+    max-width: 200px;
+    background-color: #242424;
+    font-size: 1.1em;
+    line-height: 0.5em;
+}
+
+#credits {
+    font-size: 0.7em;
+    line-height: 1.1em;
+}
+
+#middleDiv {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    text-align: center;
+    background-color: transparent;
+    color: #69dcff;
+    text-shadow: 0 0 3px #242424;
+    line-height: 0.5em;
+}
+.esri-button-overwrite {
+    width: auto;
+    display: table-cell;
+    margin: 4px;
+    background-color: #242424;
+    color: #69dcff;
+}
+table {
+    text-align: center;
+    table-layout: fixed;
+    width: 100px;
+}
+td{
+    width: 40px;
+    vertical-align: top;
+}
