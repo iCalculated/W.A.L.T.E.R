@@ -9,7 +9,7 @@
     <title>W.A.L.T.E.R.</title>
     <link
       rel="stylesheet"
-      href="https://js.arcgis.com/4.12/esri/themes/light/main.css"
+      href="https://js.arcgis.com/4.12/esri/themes/dark-blue/main.css"
     />
     <script src="https://js.arcgis.com/4.12/"></script>
 
@@ -28,7 +28,7 @@
       #paneDiv {
         padding: 10px;
         max-width: 200px;
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: #242424;
         font-size: 1.1em;
         line-height: 0.5em;
       }
@@ -44,8 +44,8 @@
         width: 100%;
         text-align: center;
         background-color: transparent;
-        color: black;
-        text-shadow: 0 0 3px #0079c1;
+        color: #69dcff;
+        text-shadow: 0 0 3px #242424;
         line-height: 0.5em;
 
       }
@@ -53,8 +53,8 @@
         width: auto;
         display: table-cell;
         margin: 4px;
-        background-color: white;
-        color: #0079c1;
+        background-color: #242424;
+        color: #69dcff;
       }
 
       table {
@@ -95,7 +95,7 @@
       FeatureLayer, GraphicsLayer) {
 
       var map = new Map({
-        basemap: "streets-navigation-vector"
+        basemap: "streets-night-vector"
       });
 
 
@@ -113,7 +113,7 @@
         symbol: {
         color: "#BA55D3",
         type: "simple-marker",
-        style: "solid"
+        style: "triangle"
      },
           visualVariables: [
             {
@@ -141,16 +141,6 @@
        });
 
        map.add(pureData);
-
-  var polygon = new Polygon({
-    rings: [
-      [-93.154083, 44.937809],
-      [-93.154583, 44.937809],
-      [-93.154583, 44.938189],
-      [-93.154083, 44.938189],
-      [-93.154083, 44.937809]
-    ]
-  });
 
   var clusters = [];
   var routeList = [];
@@ -194,10 +184,10 @@
       var bottomButtons = [];
      for(var i=1; i<7; i++){
         bottomButtons.push(document.getElementById("button"+i));
-      }      
+      }
       for(var i=1; i<7; i++){
         bottomButtons[i-1].number=i-1;
-      }      
+      }
 
 for(var i=1; i<7; i++){
 
@@ -268,8 +258,8 @@ for(var i=1; i<7; i++){
                   counter--;
                 }
               }
-              last=routes[0].geometry.paths[0];            
-            }  
+              last=routes[0].geometry.paths[0];
+            }
             }
           , i*1000);
           setTimeout(function(){
@@ -278,15 +268,15 @@ for(var i=1; i<7; i++){
                   for(var buttonNum2 = counter; buttonNum2<7; buttonNum2++){
                     var id2="button"+buttonNum2;
                     document.getElementById(id2).style.display = "none";
-                  
+
                 }},6000);
 
-        } 
+        }
 
         });
 
       document.getElementById("middleDiv").style.display = "none";
- 
+
 
       function compareArray(arr1, arr2){
         return(JSON.stringify(arr1)===JSON.stringify(arr2));
@@ -319,7 +309,7 @@ function addGraphic(type, point) {
         view.graphics.add(graphic);
       }
 
-      function addBarrier(point) { 
+      function addBarrier(point) {
 
         var x = point.longitude;
         var y = point.latitude;
@@ -341,7 +331,7 @@ function addGraphic(type, point) {
       width: 3
     }
   });
-  
+
 
   var bpolygonGraphic = new Graphic({
     geometry: bpolygon,
@@ -380,7 +370,7 @@ function addGraphic(type, point) {
             var cross = false;
             for(var j=0; j<result.route.geometry.paths[0].length-1; j++){
 
- 
+
               var a = [result.route.geometry.paths[0][j][0],result.route.geometry.paths[0][j][1]];
               var b = [result.route.geometry.paths[0][j+1][0],result.route.geometry.paths[0][j+1][1]];
               for(var g=0; g<polygonGraphic.geometry.rings[0].length-1; g++){
@@ -493,7 +483,7 @@ function addGraphic(type, point) {
 
           view.ui.empty("bottom-right");
           view.ui.add(directions, "bottom-right");
-          
+
           // console.log(routes);
 
         });
