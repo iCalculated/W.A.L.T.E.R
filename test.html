@@ -7,7 +7,6 @@
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
     />
     <title>W.A.L.T.E.R.</title>
-
     <link
       rel="stylesheet"
       href="https://js.arcgis.com/4.12/esri/themes/light/main.css"
@@ -17,6 +16,8 @@
     <style>
       html,
       body,
+
+
       #viewDiv {
         padding: 0;
         margin: 0;
@@ -37,7 +38,7 @@
         line-height: 1.1em;
       }
 
-      #maneDiv {
+      #middleDiv {
         position: absolute;
         bottom: 40px;
         width: 100%;
@@ -45,6 +46,8 @@
         background-color: transparent;
         color: black;
         text-shadow: 0 0 3px #0079c1;
+        line-height: 0.5em;
+
       }
       .esri-button-overwrite {
         width: auto;
@@ -52,6 +55,17 @@
         margin: 4px;
         background-color: white;
         color: #0079c1;
+      }
+
+      table {
+        text-align: center;
+        table-layout: fixed;
+        width: 100px;
+      }
+
+      td{
+        width: 40px;
+        vertical-align: top;
       }
     </style>
     <script>
@@ -64,7 +78,6 @@
   "esri/geometry/Polyline",
   "esri/symbols/SimpleLineSymbol",
   "esri/geometry/Polygon",
-  // "esri/tasks/GeometryService",
   "esri/symbols/SimpleFillSymbol",
       "esri/tasks/RouteTask",
       "esri/tasks/support/RouteParameters",
@@ -72,14 +85,13 @@
                 "dojo/_base/array",
                 "dojo/on",
         "dojo/dom",
-        // "esri/widgets/Feature",
               "esri/layers/FeatureLayer",
       "esri/layers/GraphicsLayer",
         "esri/widgets/Expand"
     ], function(Map, MapView,
       Graphic, Point, SimpleMarkerSymbol,
       Polyline, SimpleLineSymbol,
-      Polygon, SimpleFillSymbol, RouteTask, RouteParameters, /*Feature,*/ FeatureSet, array, on, dom,
+      Polygon, SimpleFillSymbol, RouteTask, RouteParameters, FeatureSet, array, on, dom,
       FeatureLayer, GraphicsLayer) {
 
       var map = new Map({
@@ -91,20 +103,18 @@
         container: "viewDiv",
         map: map,
         center: [-93.154283, 44.937909],
-                // center: [-118.80543,34.02700],
         zoom: 14
       });
 
-           var addingStops = true;
+      var addingStops = true;
 
-       // Reference the feature layer to query
-        var ren = {
-          type: "simple",
-          symbol: {
-            color: "#BA55D3",
-            type: "simple-marker",
-            style: "solid"
-          },
+      var cluster_mark = {
+        type: "simple",
+        symbol: {
+        color: "#BA55D3",
+        type: "simple-marker",
+        style: "solid"
+     },
           visualVariables: [
             {
               type: "size",
@@ -117,16 +127,9 @@
           ]
       };
 
-      // for(var buttonNum = 1; buttonNum < 7; buttonNum++){
-      //   var id = "button"+buttonNum;
-      //   document.getElementById(id).style.display = "none";
-      // }
-
-
-
        var featureLayer = new FeatureLayer({
          url: "https://services7.arcgis.com/9DY887YAIGnBSm9O/arcgis/rest/services/mydata_2/FeatureServer",
-         renderer: ren,
+         renderer: cluster_mark,
          opacity: .75
        });
 
@@ -139,159 +142,6 @@
 
        map.add(pureData);
 
-      //  // Layer used to draw graphics returned
-      //  var graphicsLayer = new GraphicsLayer();
-      //  map.add(graphicsLayer);
-
-
-      //  var featureLayer2 = new FeatureLayer({
-      //    url: "https://services7.arcgis.com/9DY887YAIGnBSm9O/arcgis/rest/services/mydata/FeatureServer/0",
-      //  });
-
-      //  // Layer used to draw graphics returned
-      //  var graphicsLayer2 = new GraphicsLayer();
-      //  map.add(graphicsLayer2);
-
-      //        function addGraphics(result) {
-      //   graphicsLayer.removeAll();
-      //   result.features.forEach(function(feature){
-      //     var g = new Graphic({
-      //       geometry: feature.geometry,
-      //       attributes: feature.attributes,
-      //       symbol: {
-      //        type: "simple-marker",
-      //         color: [0,0,0],
-      //         outline: {
-      //          width: 1,
-      //          color: [0,255,255],
-      //        },
-      //         size: "8px"
-      //       },
-      //       popupTemplate: {
-      //        title: "{TRL_NAME}",
-      //        content: "This a {PARK_NAME} trail located in {CITY_JUR}."
-      //       }
-      //     });
-      //     graphicsLayer.add(g);
-      //   });
-      // }
-
-      // function addGraphics2(result) {
-      //   graphicsLayer2.removeAll();
-      //   result.features.forEach(function(feature){
-      //     var g = new Graphic({
-      //       geometry: feature.geometry,
-      //       attributes: feature.attributes,
-      //       symbol: {
-      //        type: "simple-marker",
-      //         color: [0,0,0],
-      //         outline: {
-      //          width: 1,
-      //          color: [255,0,0],
-      //        },
-      //         size: "8px"
-      //       },
-      //       popupTemplate: {
-      //        title: "{crashClust2.size}",
-      //        content: "This a {x1} trail located in {x2}."
-      //       }
-      //     });
-      //     graphicsLayer2.add(g);
-      //   });
-      // }
-
-      //       function queryFeatureLayer(point, distance, spatialRelationship, sqlExpression) {
-      //   var query = {
-      //     geometry: point,
-      //     distance: distance,
-      //     spatialRelationship: spatialRelationship,
-      //     outFields: ["*"],
-      //     returnGeometry: true,
-      //     where: sqlExpression
-      //   };
-      //   featureLayer.queryFeatures(query).then(function(result) {
-      //     addGraphics(result, true);
-      //   });
-      // featureLayer2.queryFeatures(query).then(function(result) {
-      //     addGraphics2(result, true);
-      //   });
-      // }
-
-      //       view.when(function(){
-      //   queryFeatureLayer(view.center, 15000, "intersects");
-      // });
-
-
-      //   featureLayer2.queryFeatures(query).then(function(result) {
-      //     addGraphics(result, true);
-      //   });
-      // }
-
-      //       view.when(function(){
-      //   queryFeatureLayer(view.center, 15000, "intersects");
-      // });
-
-  // Create a point
-  // var point = new Point({
-  //   longitude: -118.29507,
-  //   latitude: 34.13501
-  // });
-
-  // // Create a symbol for drawing the point
-  // var markerSymbol = new SimpleMarkerSymbol({
-  //   color: [226, 119, 40],
-  //   outline: {
-  //     color: [255, 255, 255],
-  //     width: 1
-  //   }
-  // });
-
-  // // Create attributes
-  // var attributes = {
-  //   Name: "I am a point",  // The name of the pipeline
-  //   Park: "Griffith Park",  // The owner of the pipeline
-  //   City: "Los Angeles"  // The length of the pipeline
-  // };
-
-  // // Create popup template
-  // var popupTemplate = {
-  //   title: "{Name}",
-  //   content: "I live in <b>{Park}</b> in the city of <b>{City}</b>."
-  // };
-
-  // Create a graphic and add the geometry and symbol to it
-  // var pointGraphic = new Graphic({
-  //   geometry: point,
-  //   symbol: markerSymbol,
-  //   attributes: attributes,
-  //   popupTemplate: popupTemplate
-  // });
-
-  // view.graphics.add(pointGraphic);
-
-  // // Create a line geometry
-  // var polyline = new Polyline({
-  //   paths: [
-  //     [-118.29026, 34.1816],
-  //     [-118.26451, 34.09664]
-  //   ]
-  // });
-
-  // // Create a symbol for drawing the line
-  // var lineSymbol = new SimpleLineSymbol({
-  //   color: [226, 119, 40],
-  //   width: 2
-  // });
-
-  // // Create a line graphic
-  // var polylineGraphic = new Graphic({
-  //   geometry: polyline,
-  //   symbol: lineSymbol
-  // })
-
-  // // Add the graphic to the view
-  // view.graphics.add(polylineGraphic);
-
   var polygon = new Polygon({
     rings: [
       [-93.154083, 44.937809],
@@ -303,7 +153,7 @@
   });
 
   var clusters = [];
-
+  var routeList = [];
   var highlighters = [];
 
   // Create a symbol for rendering the graphic
@@ -321,12 +171,7 @@
     symbol: fillSymbol
   });
 
-view.graphics.add(polygonGraphic);
-// console.log(polygonGraphic.geometry.rings[0][0][0]);
-
-
-
-
+// view.graphics.add(polygonGraphic);
 
       var routeTask = new RouteTask({
          url: "https://utility.arcgis.com/usrsvcs/appservices/cKkdHgNqquMZkgAf/rest/services/World/Route/NAServer/Route_World"
@@ -346,49 +191,40 @@ view.graphics.add(polygonGraphic);
 
       var clNavBtn = document.getElementById("clnav");
 
-      // var btmBtn1 = document.getElementById("button1");
-      // var btmBtn2 =  document.getElementById("button2");
+      var bottomButtons = [];
+     for(var i=1; i<7; i++){
+        bottomButtons.push(document.getElementById("button"+i));
+      }      
+      for(var i=1; i<7; i++){
+        bottomButtons[i-1].number=i-1;
+      }      
 
-      // btmBtn1.addEventListener("mouseover", function(){
-      //   document.getElementById("texty").innerHTML = "Button 1";
-      //   console.log(highlighters);
-      //   highlighters[0].visible=false;
-      //   console.log(highlighters[0].visible);
-      // });
+for(var i=1; i<7; i++){
 
-      // btmBtn1.addEventListener("mouseout", function(){
-      //   document.getElementById("texty").innerHTML = "Select Route";
-      //   highlighters[0].visible=true;
-      // });
+              bottomButtons[i-1].addEventListener("mouseover", function(){
+                  document.getElementById("button_row").innerHTML = Math.floor(routeList[this.number].attributes.Total_TravelTime)+"m  "+Math.round(60*(routeList[this.number].attributes.Total_TravelTime-Math.floor(routeList[this.number].attributes.Total_TravelTime)))+"s  🞄  "+Math.round(100*routeList[this.number].attributes.Total_Miles)/100+" mi";
 
-
-      var btmBtns = [];
-     for(var btnIndex=1; btnIndex<7; btnIndex++){
-        btmBtns.push(document.getElementById("button"+btnIndex));
-      }
-      for(var btnIndex=1; btnIndex<7; btnIndex++){
-        btmBtns[btnIndex-1].numbre=btnIndex-1;
-      }
-      console.log(btmBtns);
-        //       btmBtns[btnIndex-1].addEventListener("mouseover", function(){
-        //           document.getElementById("texty").innerHTML = "Button "+btnIndex;
-        // console.log(highlighters);
-        // highlighters[btnIndex-1].visible=false;
-for(var btnIndex=1; btnIndex<7; btnIndex++){
-  console.log(btmBtns[btnIndex-1]);
-              btmBtns[btnIndex-1].addEventListener("mouseover", function(){
-                  document.getElementById("texty").innerHTML = "Button "+(1+this.numbre);
-                  console.log(btnIndex-1);
-        console.log(highlighters[btnIndex-1]);
-        highlighters[this.numbre].visible=true;
+        highlighters[this.number].visible=true;
       });
-              btmBtns[btnIndex-1].addEventListener("mouseout", function(){
-                  document.getElementById("texty").innerHTML = "Select Route";
-                  console.log(btnIndex-1);
-        console.log(highlighters[btnIndex-1]);
-        highlighters[this.numbre].visible=false;
+              bottomButtons[i-1].addEventListener("mouseout", function(){
+                  document.getElementById("button_row").innerHTML = "Select Route";
+        //           console.log(btnIndex-1);
+        // console.log(highlighters[btnIndex-1]);
+        highlighters[this.number].visible=false;
       });
-      }
+
+              bottomButtons[i-1].addEventListener("click", function(){
+                console.log(routes[this.number]);
+                  view.goTo({
+                    target: highlighters[this.number].geometry,
+                    tilt: 70
+                  },
+                  {
+                    duration: 2000,
+                    easing: "in-out-expo"
+                  });
+      })
+         }
 
       stopBtn.addEventListener("click", function() {
         addingStops = true;
@@ -411,32 +247,10 @@ for(var btnIndex=1; btnIndex<7; btnIndex++){
       });
 
       clNavBtn.addEventListener("click", function() {
-    document.getElementById("button4").style.display = "none";
-        // console.log(routes);
-
-        // console.log(document.getElementById("maneDiv"));
-
-        // document.getElementById("maneDiv").removeChild(document.getElementById("button4"));
-        // for (var i=routes.length-1; i>=0; i--) {
-        //   view.graphics.remove(routes[i]);
-        // }
-
-        // console.log(routes);
-
-              });
-
-
-      function nothing(){
-        console.log(".");
-      }
+    console.log(routeList)});
 
       navBtn.addEventListener("click", function() {
 
-        // getRoute();
-        // setTimeout(getRoute, 1000);
-        // setTimeout(getRoute, 2000);
-        // setTimeout(getRoute, 3000);
-        // setTimeout(getRoute, 4000);
         var counter=7;
         var otherCounter=0;
         var last=0;
@@ -452,39 +266,27 @@ for(var btnIndex=1; btnIndex<7; btnIndex++){
                     what=true;
                   }
                   counter--;
-                  console.log(counter);
                 }
               }
-              // console.log(routes[0].geometry.paths[0])
-              last=routes[0].geometry.paths[0];
-            }
-            // if(last!=0 && last.geometry.paths===curr.geometry.paths){counter--;}
-            // last=routes[0];
-            // console.log(counter);
-            // counter++;
-            console.log(counter);
-            otherCounter++;
-
-
+              last=routes[0].geometry.paths[0];            
+            }  
             }
           , i*1000);
           setTimeout(function(){
-                  document.getElementById("texty").innerHTML = (counter-1) + " Routes Found";
-                  document.getElementById("maneDiv").style.display = "block";
+                  document.getElementById("button_row").innerHTML = (counter-1) + " Routes Found";
+                  document.getElementById("middleDiv").style.display = "block";
                   for(var buttonNum2 = counter; buttonNum2<7; buttonNum2++){
                     var id2="button"+buttonNum2;
                     document.getElementById(id2).style.display = "none";
-
+                  
                 }},6000);
-          // if(i>0 && routes[i] === routes[i-1]){
-          //   break;
-          // }
-        }
+
+        } 
 
         });
 
-      document.getElementById("maneDiv").style.display = "none";
-
+      document.getElementById("middleDiv").style.display = "none";
+ 
 
       function compareArray(arr1, arr2){
         return(JSON.stringify(arr1)===JSON.stringify(arr2));
@@ -496,10 +298,6 @@ for(var btnIndex=1; btnIndex<7; btnIndex++){
                   addGraphic("start", event.mapPoint);
                } else if (routeParams.stops.features.length === 1) {
                  addGraphic("finish", event.mapPoint);
-                  //getRoute();
-                // } else {
-                //   view.graphics.removeAll();
-                //  addGraphic("start",event.mapPoint);
             }
       }
       else{
@@ -521,7 +319,7 @@ function addGraphic(type, point) {
         view.graphics.add(graphic);
       }
 
-      function addBarrier(point) {
+      function addBarrier(point) { 
 
         var x = point.longitude;
         var y = point.latitude;
@@ -536,14 +334,6 @@ function addGraphic(type, point) {
     ]
   });
 
-// var feature = new Feature({
-//   container:"feature-node",
-//   graphic: graphic,
-//   map: view.map,
-//   spatialReference: view.spatialReference
-// });
-
-  // Create a symbol for rendering the graphic
   var bfillSymbol = new SimpleFillSymbol({
     color: [227, 139, 79, 0.8],
     outline: {
@@ -551,22 +341,13 @@ function addGraphic(type, point) {
       width: 3
     }
   });
+  
 
-
-  // Add the geometry and symbol to a new graphic
   var bpolygonGraphic = new Graphic({
     geometry: bpolygon,
     symbol: bfillSymbol
   });
 
-        // var graphic = new Graphic({
-        //   symbol: {
-        //     type: "simple-marker",
-        //     color: "red",
-        //     size: "8px"
-        //   },
-        //   geometry: point
-        // });
         routeParams.polygonBarriers.features.push(bpolygonGraphic);
         view.graphics.add(bpolygonGraphic);
       }
@@ -579,25 +360,7 @@ function addGraphic(type, point) {
         return (ccw(a,c,d) != ccw(b,c,d)) && (ccw(a,b,c) != ccw(a,b,d));
       }
 
-      // console.log(ccw([0,0],[0,-1],[1,0]));
-
-      // console.log(ccw([0,0],[0,-1],[-1,0]));
-
-      // console.log(intersect([0,1],[0,-1],[1,0],[-1,0]));
-
-      // console.log(intersect([0,1],[0,-1],[1,0],[-0.000000000001,0]));
-
-
-
       function getRoute() {
-        // Setup the route parameters
-        // var routeParams = new RouteParameters({
-        //   stops: new FeatureSet({
-        //     features: view.graphics.toArray()
-        //   }),
-        //   returnDirections: true
-        // });
-        // Get the route
 
         routeTask.solve(routeParams).then(function(data) {
           data.routeResults.forEach(function(result) {
@@ -605,7 +368,6 @@ function addGraphic(type, point) {
               type: "simple-line",
               color: [5, 150, 255, 1.0],
               width: 3
-
             };
 
 
@@ -618,7 +380,7 @@ function addGraphic(type, point) {
             var cross = false;
             for(var j=0; j<result.route.geometry.paths[0].length-1; j++){
 
-
+ 
               var a = [result.route.geometry.paths[0][j][0],result.route.geometry.paths[0][j][1]];
               var b = [result.route.geometry.paths[0][j+1][0],result.route.geometry.paths[0][j+1][1]];
               for(var g=0; g<polygonGraphic.geometry.rings[0].length-1; g++){
@@ -630,21 +392,19 @@ function addGraphic(type, point) {
               }
             }
             if(cross){
-              // clusters[clustIndex].visible=true;
               var size;
                 size = clusterData[clustIndex][2];
                 if (size > biggestSize){
                   biggestCluster = clusters[clustIndex];
                   biggestSize = size;
                 }
-              // console.log(size);
             }
 
 
           }
 
           if(biggestCluster === 0 ){
-            console.log("ok");
+            // console.log("ok");
           }
           else{
             biggestCluster.visible=true;
@@ -695,11 +455,9 @@ function addGraphic(type, point) {
                   width: 6
                   }
             });
-            // var clone = JSON.parse(JSON.stringify(result.route));
-            // clone.symbol.color[0]=255;
-            // console.log(result.route.symbol.color);
-            // console.log(clone.symbol.color);
+
             highlighters.push(clone);
+            routeList.push(result.route);
             clone.visible = false;
             view.graphics.add(result.route, 0);
             view.graphics.add(clone);
@@ -720,10 +478,6 @@ function addGraphic(type, point) {
           directions.style.marginTop = 0;
           directions.style.paddingTop = "15px";
 
-          // Show the directions
-          console.log(data.routeResults[0].directions);
-
-          // directions.appendChild(data.routeResults[0].directions.totalDriveTime);
 
           var timeHtml =  document.createElement("p");
           timeHtml.innerHTML = "Drive time: <b>" + Math.floor(data.routeResults[0].directions.totalDriveTime) + "m " + Math.round(60*(data.routeResults[0].directions.totalDriveTime -Math.floor(data.routeResults[0].directions.totalDriveTime))) + "s </b><br>Distance: <b>" + Math.round(data.routeResults[0].directions.totalLength * 100)/100 + " miles</b>";
@@ -737,14 +491,10 @@ function addGraphic(type, point) {
             directions.appendChild(direction);
           });
 
-          // // Add directions to the view
-          // var timeHtml =  document.createElement("li");
-          // timeHtml.innerHTML = data.routeResults[0].directions.totalDriveTime;
-          // directions.appendChild(timeHtml);
-
           view.ui.empty("bottom-right");
           view.ui.add(directions, "bottom-right");
-          console.log(routes);
+          
+          // console.log(routes);
 
         });
       }
@@ -759,15 +509,6 @@ function addGraphic(type, point) {
       var scalex = 0.00025 * (Math.sqrt(size));
       var scaley = 0.00018 * (Math.sqrt(size));
                 var cpolygon = new Polygon({
-      //       rings: [
-      // [cx-(size)*(0.00025),cy-(size)*(0.00018)],
-      // [cx+(size)*(0.00025),cy-(size)*(0.00018)],
-      // [cx+(size)*(0.00025),cy+(size)*(0.00018)],
-      // [cx-(size)*(0.00025),cy+(size)*(0.00018)],
-      // [cx-(size)*(0.00025),cy-(size)*(0.00018)]
-      //       ]
-
-
                   rings: [
       [cx-scalex,cy-scaley],
       [cx+scalex,cy-scaley],
@@ -1211,9 +952,7 @@ function addGraphic(type, point) {
           addCluster( -93.171602  , 44.9011435  , 6 );
 
         }
-        // addClusters();
 
-        // console.log(clusters);
 
         clusters[1].symbol.outline.color.b = 255;
         clusters[1].symbol.outline.color.r = 0;
@@ -1240,14 +979,16 @@ function addGraphic(type, point) {
         Created by Mani Chadaga, Akshay Nambudiripad, and Sasha Hydrie with help from ArcGIS (Esri)
       </p>
     </div>
-    <div id="maneDiv" class="esri-widget">
-      <h2 id="texty"><b></b></h2>
+    <div id="middleDiv" class="esri-widget">
+      <h2 id="button_row"><b></b></h2>
       <button id="button1" class="esri-button esri-button-overwrite">Route 1</button>
       <button id="button2" class="esri-button esri-button-overwrite">Route 2</button>
       <button id="button3" class="esri-button esri-button-overwrite">Route 3</button>
       <button id="button4" class="esri-button esri-button-overwrite">Route 4</button>
       <button id="button5" class="esri-button esri-button-overwrite">Route 5</button>
       <button id="button6" class="esri-button esri-button-overwrite">Route 6</button>
+<!--       <h3 id="bottom_text">Fastest<br></br>Slowest</3> -->
+<!--       <center><table style="width:20%;text-align:center;table-layout:fixed"><tr><th style="width:40px"><button id="button1" class="esri-button esri-button-overwrite">Route 1</button></th><th style="width:40px;padding:15px"><button id="button2" class="esri-button esri-button-overwrite">Route 2</button></th><th style="width:40px"><button id="button3" class="esri-button esri-button-overwrite">Route 3</button></th><th style="width:40px;padding:15px"><button id="button4" class="esri-button esri-button-overwrite">Route 4</button></th><th style="width:40px"><button id="button5" class="esri-button esri-button-overwrite">Route 5</button></th><th style="width:40px;padding:15px"><button id="button6" class="esri-button esri-button-overwrite">Route 6</button></th></th></tr><tr><th>fastest</th></tr></table></center> -->
     </div>
   </body>
 </html>
