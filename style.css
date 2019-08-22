@@ -7,6 +7,7 @@ body,
     width: 100%;
     background-color: #242424;
 }
+
 #paneDiv {
     padding: 10px;
     max-width: 200px;
@@ -14,10 +15,12 @@ body,
     font-size: 1.1em;
     line-height: 0.5em;
 }
+
 #credits {
     font-size: 0.7em;
     line-height: 1.1em;
 }
+
 #middleDiv {
     position: absolute;
     bottom: 40px;
@@ -28,6 +31,7 @@ body,
     text-shadow: 0 0 3px #242424;
     line-height: 0.5em;
 }
+
 .esri-button-overwrite {
     width: auto;
     display: table-cell;
@@ -35,12 +39,14 @@ body,
     background-color: #242424;
     color: #69dcff;
 }
+
 table {
     text-align: center;
     table-layout: fixed;
     width: 100px;
 }
-td{
+
+td {
     width: 40px;
     vertical-align: top;
 }
