@@ -42,15 +42,15 @@
               symbol: {
                   color: "#BA55D3",
                   type: "simple-marker",
-                  style: "triangle"
+                  style: "circle"
               },
               visualVariables: [{
                   type: "size",
                   field: "x3",
                   minDataValue: 0,
                   maxDataValue: 30,
-                  minSize: "3px",
-                  maxSize: "70px"
+                  minSize: "30px",
+                  maxSize: "700px"
               }]
           };
 
