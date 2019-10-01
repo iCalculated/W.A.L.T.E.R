@@ -5,13 +5,52 @@ body,
     margin: 0;
     height: 100%;
     width: 100%;
+/*    width: 90%;*/
     background-color: #242424;
+/*    padding-right: 320px;*/
+    
 }
 
 #paneDiv {
-    padding: 10px;
-    max-width: 200px;
+/*    padding: 10px;
+    max-width: 215px;
     background-color: #242424;
+    font-size: 1.1em;
+    line-height: 0.5em;
+    height: 100%;
+    top: 0;
+    left: 0;*/
+      height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 320px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 0; /* Stay on top */
+  top: 0; /* Stay at the top */
+  right: 0;
+  background-color: #0b162e; /* Black */
+  opacity: 0.95;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding: 10px;
+}
+
+#topDiv {
+    top: 40px;
+    right: 15px;
+
+
+    text-align: center;
+    background-color: transparent;
+}
+
+#searchDiv1 {
+    max-width: 240px;
+    background-color: transparent;
+    font-size: 1.1em;
+    line-height: 0.5em;
+}
+
+#searchDiv2 {
+    max-width: 240px;
+    background-color: transparent;
     font-size: 1.1em;
     line-height: 0.5em;
 }
@@ -27,8 +66,8 @@ body,
     width: 100%;
     text-align: center;
     background-color: transparent;
-    color: #69dcff;
-    text-shadow: 0 0 3px #242424;
+    color: #242424;
+    text-shadow: 0 0 3px #69dcff;
     line-height: 0.5em;
 }
 
@@ -38,6 +77,11 @@ body,
     margin: 4px;
     background-color: #242424;
     color: #69dcff;
+}
+
+.esri-expand {
+  right: 15px;
+  top: 15px;
 }
 
 table {
